@@ -61,10 +61,13 @@ fi
 # 4. Setup keybind in ~/.config/hypr/hyprland/keybinds.lua if not present
 KEYBINDS_LUA="$HOME/.config/hypr/hyprland/keybinds.lua"
 if [ -f "$KEYBINDS_LUA" ]; then
-    if ! grep -q 'hyprswitch' "$KEYBINDS_LUA"; then
+    if grep -q 'hl\.bind("SUPER, P", hl\.dsp\.exec_cmd("hyprswitch"))' "$KEYBINDS_LUA"; then
+        sed -i 's/hl\.bind("SUPER, P", hl\.dsp\.exec_cmd("hyprswitch"))/hl\.bind("SUPER +  P", hl\.dsp\.exec_cmd("hyprswitch"))/g' "$KEYBINDS_LUA"
+        echo "✓ Updated hyprswitch keybind syntax to 'SUPER +  P' in $KEYBINDS_LUA"
+    elif ! grep -q 'hyprswitch' "$KEYBINDS_LUA"; then
         echo "Adding Super+P keybind to $KEYBINDS_LUA..."
-        echo -e '\n-- Display switcher (hyprswitch)\nhl.bind("SUPER, P", hl.dsp.exec_cmd("hyprswitch"))' >> "$KEYBINDS_LUA"
-        echo "✓ Added 'SUPER, P' bind to $KEYBINDS_LUA"
+        echo -e '\n-- Display switcher (hyprswitch)\nhl.bind("SUPER +  P", hl.dsp.exec_cmd("hyprswitch"))' >> "$KEYBINDS_LUA"
+        echo "✓ Added 'SUPER +  P' bind to $KEYBINDS_LUA"
     else
         echo "✓ $KEYBINDS_LUA already contains hyprswitch bind."
     fi

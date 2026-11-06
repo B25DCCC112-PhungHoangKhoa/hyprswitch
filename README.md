@@ -45,7 +45,7 @@ The installation script will:
 1. Verify required dependencies (`python3`, `python-gobject`, `gtk4`, `gtk4-layer-shell`, `hyprctl`).
 2. Symlink `main.py` into `~/.local/bin/hyprswitch`.
 3. Add `pcall(require, "monitors")` to `~/.config/hypr/hyprland.lua`.
-4. Add the `SUPER, P` keybind to `~/.config/hypr/hyprland/keybinds.lua`.
+4. Add the `SUPER + P` keybind (`hl.bind("SUPER +  P", hl.dsp.exec_cmd("hyprswitch"))`) to `~/.config/hypr/hyprland/keybinds.lua`.
 5. Add layer rules (blur, popin animation, ignorealpha) to `~/.config/hypr/hyprland/rules.conf`.
 6. Reload the active Hyprland configuration automatically.
 
